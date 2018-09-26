@@ -14,6 +14,7 @@ def isEmpty(root):
     else:
         return 1
 
+
 def findLCA(root, n1, n2):
 
     # Base Case
@@ -39,41 +40,14 @@ def findLCA(root, n1, n2):
     # Otherwise check if left subtree or right subtree is LCA
     return left_lca if left_lca is not None else right_lca
 
-
+#test if returns negative result when isEmpty() performed on a non empty tree:
 def test_answer():
-    root = Node(7)
-    root.left = Node(3)
-    root.right = Node(10)
-    assert findLCA(root, 3, 10).key == 7
-
-def test_answer1():
-    root = Node(7)
-    root.left = Node(3)
-    root.right = Node(10)
-    root.left.left = Node(2)
-    root.left.left.right = Node(4)
-    root.left.right = Node(5)
-    root.left.right.right = Node(6)
-    root.right.left = Node(8)
-    root.right.right = Node(14)
-    assert findLCA(root, 2, 5).key == 3
-
-def test_answer2():
     root = Node(7)
     root.left = Node(3)
     root.right = Node(10)
     assert isEmpty(root) == 1
 
-# root = Node(7)
-# root.left = Node(3)
-# root.right = Node(10)
-# root.left.left = Node(2)
-# root.left.left.right = Node(4)
-# root.left.right = Node(5)
-# root.left.right.right = Node(6)
-# root.right.left = Node(8)
-# root.right.right = Node(14)
-# print ("LCA(4,5) = ", findLCA(root, 4, 5).key)
-# print ("LCA(4,6) = ", findLCA(root, 4, 6).key)
-# print ("LCA(3,4) = ", findLCA(root, 3, 4).key)
-# print ("LCA(2,4) = ", findLCA(root, 2, 4).key)
+#test if isEmpty() returns positive result if tree is empty
+def test_answer1():
+    root = None
+    assert isEmpty(root) == 0
