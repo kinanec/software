@@ -51,3 +51,10 @@ def test_answer():
 def test_answer1():
     root = None
     assert isEmpty(root) == 0
+
+#basic example to test LCA for a binary tree of height one
+def test_answer2():
+    root = Node(7)
+    root.left = Node(3)
+    root.right = Node(10)
+    assert findLCA(root, 3, 10).key == 7
