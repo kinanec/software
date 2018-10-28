@@ -1,7 +1,5 @@
 import networkx as nx
 G = nx.DiGraph()
-G.add_nodes_from([1, 10])
-G.add_edges_from([(1,2), (1,3), (1,5), (2,4), (2,5), (3,6), (3,7), (4,8), (5,9), (6,10)])
 
 def findLCA(graph, root, a, b):
 
@@ -20,7 +18,34 @@ def findLCA(graph, root, a, b):
     pathsB = find_all_paths(G,root,b)
     tracer.append(pathsA)
     tracer.append(pathsB)
-    
+    i = 0
+    while(i<len(pathsA)):
+        pathsA[i].reverse()
+        i+=1
+
+    j=0
+    while(j<len(pathsB)):
+        pathsB[j].reverse()
+        j+=1
+    maxHeight = 0
+    i=0
+    for pathA in tracer[0]:
+        for pathB in tracer[1]:
+            i = 1
+            while(i <= len(pathA) and i <= len(pathB)):
+                if(pathB[-i]!=pathA[-i]):
+                    break
+                i = 1 + i
+                if i>maxHeight:
+                    maxHeight=i
+                    print("New LCA " + str(pathA[-i+1]))
+                    lc = pathA[-i+1]
+                elif i==maxHeight and lc!=pathA[-i+1]:
+                    temp = lc
+                    lc = []
+                    lc.append(temp)
+                    lc.append(pathA[-i+1])
+        return lc
 
 def find_all_paths(graph, start, end, path=[]):
     path = path + [start]
