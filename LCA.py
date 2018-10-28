@@ -10,4 +10,7 @@ def findLCA(graph, root, a, b):
     if(not graph.has_node(a)):
         print(str(a) + " does not exist in the graph.")
         return None
+    if(not graph.has_node(b)):
+        print(str(b) + " does not exist in the graph.")
+        return None
     
