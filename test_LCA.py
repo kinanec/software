@@ -1,34 +1,49 @@
 import pytest
 import LCA
+import networkx as nx
 
-# class test_LCA(unittest.TestCase):
 
 #test result for no input
-def test_answer():
-    assert LCA.findLCA(None, None, None) == None
+def test_answer1():
+    assert LCA.findLCA(None, None, None, None) == None
 
 #test when both nodes are the root node
-def test_answer1():
-    root = LCA.Node(1)
-    assert LCA.findLCA(root,1,1) == 1
+def test_answer2():
+    G = nx.DiGraph()
+    G.add_node(1)
+    assert LCA.findLCA(G,1,1,1) == 1
 
 #test when value is not in the tree
-def test_answer2():
-    root = LCA.Node(6)
-    root.left = LCA.Node(4)
-    assert LCA.findLCA(root, 2,10) == -1
+def test_answer3():
+    G = nx.DiGraph()
+    G.add_nodes_from([1,3])
+    assert LCA.findLCA(G, 1, 2,10) == None
 
-#test for n1 is root.left and root.right
-    root.right = LCA.Node(10)
-    assert LCA.findLCA(root, 4,10) == 6
+#test for a root and two child nodes
+def test_answer4():
+    G = nx.DiGraph()
+    G.add_nodes_from([1,3])
+    G.add_edges_from([(1,2),(1,3)])
+    assert LCA.findLCA(G, 1, 2,3) == 1
 
-#test to make recursion happen
-    root.left.left = LCA.Node(2)
-    root.left.right = LCA.Node(5)
-    root.right.left = LCA.Node(7)
-    root.right.right = LCA.Node(11)
-    assert LCA.findLCA(root, 2,11) == 6
-    assert LCA.findLCA(root, 7,11) == 10
+#test when a is not in the graph
+def test_answer5():
+    G = nx.DiGraph()
+    G.add_nodes_from([1,3])
+    assert LCA.findLCA(G, 1, 4,3) == None
 
-# test where one n1 is root and n2 is another tree element
-    assert LCA.findLCA(root, 6,10) == 6
+#test when b is not in the graph
+def test_answer6():
+    G = nx.DiGraph()
+    G.add_nodes_from([1,3])
+    assert LCA.findLCA(G, 1, 3, 4) == None
+
+#general testing of a big DAG
+def test_answer7():
+    G = nx.DiGraph()
+    G.add_nodes_from([1, 10])
+    G.add_edges_from([(1,2), (1,3), (1,5), (2,4), (2,5), (3,6), (3,7), (4,8), (5,8), (5,9), (5,10), (6,10)])
+    assert LCA.findLCA(G, 1, 2, 7) == 1
+    assert LCA.findLCA(G, 1, 7, 6) == 3
+    assert LCA.findLCA(G, 1, 4, 7) == 1
+    assert LCA.findLCA(G, 1, 4, 5) == 2
