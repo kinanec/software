@@ -28,21 +28,24 @@ def getProfileInfo():
 #returns a sorted list of followers and their respective star counts
 def getFollowerStars():
     followerList = []
-    for follower in user.get_followers():
-        #followerList.append(follower.name)
-        stars = 0
-        totalStars = 0
-        for repo in follower.get_repos():
-            stars = repo.stargazers_count
-            totalStars = totalStars+stars
-        #followerList.append(totalStars)
-        followerList.append([follower.login, totalStars])
-    followerList.sort(key=lambda x:x[1])
-    followerList.reverse()
+    while (len(followerList)<40):
+        for follower in user.get_followers():
+            #followerList.append(follower.name)
+            stars = 0
+            totalStars = 0
+            for repo in follower.get_repos():
+                stars = repo.stargazers_count
+                totalStars = totalStars+stars
+            #followerList.append(totalStars)
+            followerList.append([follower.login, totalStars])
+        followerList.sort(key=lambda x:x[1])
+        followerList.reverse()
     #print (followerList)
     return followerList
 #print ("these are the followers and their respective stars", getFollowerStars())
-
+followerList = getFollowerStars()
+print(followerList)
+mostStarred = ""
 #returns the most starred repo by the most starred user
 def topRepo():
     topRepoList = []
@@ -64,6 +67,7 @@ def topRepo():
 topRepo()
 
 def languages():
+    returnList = []
     repoContent = []
     languageList = []
     #Map for file extentions to programing language
@@ -95,10 +99,12 @@ def languages():
         'JS' : 'JavaScript',
         'HTML' : 'HTML',
         'CSS' : 'CSS',
-        'PHP' : 'PHP'
+        'PHP' : 'PHP',
+        'PDE' : 'Processing',
+        'XML' : 'XML'
     }
     for key, val in languageDict.items():
-        print (key)
+        #print (key)
         languageList.append(key)
     x = getFollowerStars()
     mostStarred = x[0][0]
@@ -107,7 +113,7 @@ def languages():
     repoDetails = { 'Name' : repo.name,
                         'Total' : 0         }
     contents = repo.get_contents('')
-    print(contents)
+    #print(contents)
     for content_file in contents:
         if content_file.type == 'dir':
             contents.extend(repo.get_contents(content_file.path))
@@ -125,10 +131,18 @@ def languages():
                 else:
                     langList.append(split[1].upper())
                     sizeList.append(content_file.size)
-    print(langList)
-    print(sizeList)
+    #print(langList)
+    #print(sizeList)
     #print("this is a list of langs and size of files", langList)
+    returnList.append([langList,sizeList])
+    return returnList
+print(languages())
 languages()
+
+
+
+
+
 #if split[1].upper() in langList:
 #    langList[langList.index(split[1])]
 #langList.append([split[1],content_file.size])
@@ -167,6 +181,3 @@ languages()
 #            split = repo.split('.')
 #            extensions.append(split[1])
 #    print (extensions)
-
-
-languages()
