@@ -4,13 +4,13 @@
 }
 .hometext{
   text-align:center;
-  padding-top:100px;
+  padding-top:50px;
   padding-left:80px;
   padding-right:80px;
 }
 .h3_text-muted{
   text-align:center;
-  padding-top:100px;
+  padding-top:50px;
   padding-left:80px;
   padding-right:80px;
   color:grey;
@@ -22,4 +22,7 @@
   padding-top:20px;
   margin-left: auto;
   margin-right: auto;
+}
+.navbar{
+  font-size:20px
 }
