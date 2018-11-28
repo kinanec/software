@@ -5,6 +5,7 @@ import final
 
 #==========================================
 #       Visualisation #1
+#    Bar graphs for 3 different users
 #==========================================
 
 users, stars = zip(*final.followerList)
@@ -16,6 +17,7 @@ users, stars = zip(*final.followerList)
 #    )]
 
 #py.iplot(data, filename='basic-bar')
+
 
 x = users
 y = stars
@@ -34,6 +36,6 @@ data = [go.Bar(
             opacity=0.6
         )]
 
-py.plot(data, filename='bar-direct-labels v2')
+py.plot(data, filename='bar-direct-labels v4')
 
 # https://plot.ly/~kinanec/6/#/
