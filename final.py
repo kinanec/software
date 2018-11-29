@@ -1,5 +1,6 @@
 from github import Github
-
+langList = []
+sizeList = []
 #lets user login
 while True:
     username =  "kinanec"                      #input("please enter your username: ")
@@ -45,7 +46,7 @@ def getFollowerStars():
 #print ("these are the followers and their respective stars", getFollowerStars())
 followerList = getFollowerStars()
 print(followerList)
-mostStarred = ""
+#mostStarred = ""
 #returns the most starred repo by the most starred user
 def topRepo():
     topRepoList = []
@@ -118,8 +119,8 @@ def languages():
         if content_file.type == 'dir':
             contents.extend(repo.get_contents(content_file.path))
 
-    langList = []
-    sizeList = []
+    #langList = []
+    #sizeList = []
     for content_file in contents:
         if "." in content_file.path:
             split = content_file.path.split('.')
@@ -134,8 +135,8 @@ def languages():
     #print(langList)
     #print(sizeList)
     #print("this is a list of langs and size of files", langList)
-    returnList.append([langList,sizeList])
-    return returnList
+    #returnList.append([langList,sizeList])
+    return langList, sizeList
 print(languages())
 languages()
 
